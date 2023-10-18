@@ -1,13 +1,15 @@
 import { Helmet } from 'react-helmet-async';
-import Banner from '../../components/Banner/Banner';
+import Brands from '../../components/Brands/Brands';
+import HomeBanner from '../../components/Banner/HomeBanner';
 
 const Home = () => {
 	return (
-		<div className="container">
+		<div>
 			<Helmet>
 				<title>Digital Dynamo | Home</title>
 			</Helmet>
-			<Banner />
+			<HomeBanner />
+			<Brands />
 		</div>
 	);
 };

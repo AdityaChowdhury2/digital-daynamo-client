@@ -3,7 +3,7 @@ import './Banner.css';
 import { register } from 'swiper/element/bundle';
 // register Swiper custom elements
 register();
-const Banner = () => {
+const HomeBanner = () => {
 	return (
 		<swiper-container
 			className="mySwiper"
@@ -27,4 +27,4 @@ const Banner = () => {
 	);
 };
 
-export default Banner;
+export default HomeBanner;
