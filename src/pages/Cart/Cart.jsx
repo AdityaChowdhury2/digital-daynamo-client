@@ -1,5 +1,4 @@
 import emptyCart from '/empty-cart.svg';
-
 const Cart = () => {
 	return (
 		<>

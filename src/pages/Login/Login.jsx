@@ -3,7 +3,11 @@ import LoginAnimation from './loginAnimation.json';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
+import { Icon } from '@iconify/react';
 const Login = () => {
+	const [isShow, setIsShow] = useState(false);
+
 	return (
 		<section className="bg-base-100 container  mt-20">
 			<Helmet>
@@ -48,14 +52,27 @@ const Login = () => {
 									>
 										Password
 									</label>
-
-									<input
-										type="password"
-										name="password"
-										id="password"
-										placeholder="**********"
-										className="input input-bordered w-full "
-									/>
+									<div className="relative">
+										<input
+											type={`${isShow ? 'text' : 'password'}`}
+											name="password"
+											id="password"
+											placeholder="enter your password"
+											className="input input-bordered w-full "
+										/>
+										<div
+											className="absolute right-3 top-1/4 hover:cursor-pointer"
+											onClick={() => {
+												setIsShow(!isShow);
+											}}
+										>
+											{isShow ? (
+												<Icon icon="emojione:see-no-evil-monkey" width={24} />
+											) : (
+												<Icon icon="emojione:monkey-face" width={24} />
+											)}
+										</div>
+									</div>
 								</div>
 
 								<button

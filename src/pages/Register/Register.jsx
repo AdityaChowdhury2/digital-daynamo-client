@@ -3,8 +3,28 @@ import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import RegistrationAnimation from './registrationAnimation.json';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { Icon } from '@iconify/react';
+import { useState } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 const Register = () => {
+	const [isShow, setIsShow] = useState(false);
+	const { createUser } = useAuth();
+	const handleSignUp = e => {
+		e.preventDefault();
+		const form = e.target;
+		const email = form.email.value;
+		const password = form.password.value;
+		if (password.length < 6) {
+			console.log('Password must be at least 6 characters');
+		} else if (/^[^A-Z]*$/.test(password)) {
+			console.log('Password must contain minimum one capital letter');
+		} else if (/^[^!@#$%^&*()_]*$/.test(password)) {
+			console.log('Password must contain at least one special character');
+		} else {
+			createUser(email, password).then(res => console.log(res.user));
+		}
+	};
 	return (
 		<section className="bg-base-100 container  mt-20">
 			<Helmet>
@@ -25,7 +45,7 @@ const Register = () => {
 							<h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl mt-2 ">
 								Create a new account with us
 							</h1>
-							<form className="space-y-4 md:space-y-6" action="#">
+							<form className="space-y-4 md:space-y-6" onSubmit={handleSignUp}>
 								<div>
 									<label
 										htmlFor="email"
@@ -49,21 +69,34 @@ const Register = () => {
 									>
 										Password
 									</label>
-
-									<input
-										type="password"
-										name="password"
-										id="password"
-										placeholder="**********"
-										className="input input-bordered w-full "
-									/>
+									<div className="relative">
+										<input
+											type={`${isShow ? 'text' : 'password'}`}
+											name="password"
+											id="password"
+											placeholder="enter your password"
+											className="input input-bordered w-full "
+										/>
+										<div
+											className="absolute right-3 top-1/4 hover:cursor-pointer"
+											onClick={() => {
+												setIsShow(!isShow);
+											}}
+										>
+											{isShow ? (
+												<Icon icon="emojione:see-no-evil-monkey" width={24} />
+											) : (
+												<Icon icon="emojione:monkey-face" width={24} />
+											)}
+										</div>
+									</div>
 								</div>
 
 								<button
 									type="submit"
 									className="w-full  bg-base-200 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-base-300"
 								>
-									Sign in
+									Sign Up
 								</button>
 								<p className="text-sm font-light ">
 									Already Have an account?{' '}
