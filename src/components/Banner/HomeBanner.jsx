@@ -3,7 +3,13 @@ import './Banner.css';
 import { register } from 'swiper/element/bundle';
 // register Swiper custom elements
 register();
+
 const HomeBanner = () => {
+	const banners = [
+		'https://i.ibb.co/2FbfFpc/banner1.png',
+		'https://i.ibb.co/c8yHSxC/banner2.png',
+		'https://i.ibb.co/Y3p8jFW/banner3.png',
+	];
 	return (
 		<swiper-container
 			className="mySwiper"
@@ -14,15 +20,13 @@ const HomeBanner = () => {
 			autoplay-delay="2500"
 			autoplay-disable-on-interaction="false"
 		>
-			<swiper-slide>
-				<img src="https://i.ibb.co/2FbfFpc/banner1.png" alt="" />
-			</swiper-slide>
-			<swiper-slide>
-				<img src="https://i.ibb.co/c8yHSxC/banner2.png" alt="" />
-			</swiper-slide>
-			<swiper-slide>
-				<img src="https://i.ibb.co/Y3p8jFW/banner3.png" alt="" />
-			</swiper-slide>
+			{banners.map(bnr => {
+				return (
+					<swiper-slide key={bnr}>
+						<img src={bnr} alt="" />
+					</swiper-slide>
+				);
+			})}
 		</swiper-container>
 	);
 };

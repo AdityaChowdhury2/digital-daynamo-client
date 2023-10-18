@@ -22,7 +22,7 @@ const Brands = () => {
 					<Link key={brand._id} to={`/brands/${brand.name}`}>
 						<div className="relative grid h-[25rem] w-full max-w-[28rem] flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center text-gray-700">
 							<div
-								style={{ backgroundImage: `url('${brand.image}')` }}
+								style={{ backgroundImage: `url('${brand.brand_image}')` }}
 								className="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-cover bg-clip-border bg-center text-gray-700 shadow-none"
 							>
 								<div className="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-t from-black/80 via-black/50"></div>
