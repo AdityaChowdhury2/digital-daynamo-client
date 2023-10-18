@@ -1,21 +1,39 @@
 import Lottie from 'lottie-react';
 import LoginAnimation from './loginAnimation.json';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
+import useAuth from '../../hooks/useAuth';
 const Login = () => {
 	const [isShow, setIsShow] = useState(false);
+	const navigate = useNavigate();
+	const location = useLocation();
+	const { logIn } = useAuth();
+	const handleSignIn = e => {
+		e.preventDefault();
+		const form = e.target;
+		const email = form.email.value;
+		const password = form.password.value;
+		logIn(email, password)
+			.then(res => {
+				console.log(res.user);
+				navigate(location.state || '/');
+			})
+			.catch(e => {
+				console.log(e.message);
+			});
+	};
 
 	return (
 		<section className="bg-base-100 container  mt-20">
 			<Helmet>
 				<title>Digital Dynamo | Login</title>
 			</Helmet>
-			<div className="flex items-center">
-				<div className="w-1/2">
-					<div className="w-full bg-base-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 ">
+			<div className="flex items-center flex-col-reverse lg:flex-row px-2">
+				<div className="lg:w-1/2 w-full">
+					<div className="bg-base-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 mx-auto">
 						<div className="p-6 space-y-4 sm:p-8 min-w-lg">
 							<div className="flex justify-center">
 								<div className="w-20">
@@ -28,7 +46,7 @@ const Login = () => {
 							<h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl ">
 								Sign in to your account
 							</h1>
-							<form className="space-y-4 md:space-y-6" action="#">
+							<form className="space-y-4 md:space-y-6" onSubmit={handleSignIn}>
 								<div>
 									<label
 										htmlFor="email"

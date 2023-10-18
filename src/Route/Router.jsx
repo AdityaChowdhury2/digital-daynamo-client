@@ -5,6 +5,7 @@ import ErrorElement from '../components/ErrorElement/ErrorElement';
 import Cart from '../pages/Cart/Cart';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
+import PrivateRoute from './PrivateRoute';
 
 const Router = createBrowserRouter([
 	{
@@ -26,7 +27,11 @@ const Router = createBrowserRouter([
 			},
 			{
 				path: '/cart',
-				element: <Cart />,
+				element: (
+					<PrivateRoute>
+						<Cart />
+					</PrivateRoute>
+				),
 			},
 		],
 	},

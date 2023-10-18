@@ -1,12 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import userDefault from '/user.svg';
 
 const Header = () => {
 	const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+	const { user, logOut } = useAuth();
 
 	const handleThemeChange = () => {
 		theme === 'light' ? setTheme('dark') : setTheme('light');
+	};
+	const handleLogout = () => {
+		logOut()
+			.then(() => {
+				console.log('user logged out');
+			})
+			.catch(e => {
+				console.log(e.message);
+			});
 	};
 
 	useEffect(() => {
@@ -17,17 +29,39 @@ const Header = () => {
 	const navLinks = (
 		<>
 			<li>
-				<NavLink to={'/'}>Home</NavLink>
+				<NavLink
+					className={({ isActive }) => (isActive ? 'font-bold' : '')}
+					to={'/'}
+				>
+					Home
+				</NavLink>
 			</li>
 			<li>
-				<NavLink to={'/addProduct'}>Add Product</NavLink>
+				<NavLink
+					className={({ isActive }) => (isActive ? 'font-bold' : '')}
+					to={'/addProduct'}
+				>
+					Add Product
+				</NavLink>
 			</li>
 			<li>
-				<NavLink to={'/cart'}>Cart</NavLink>
+				<NavLink
+					className={({ isActive }) => (isActive ? 'font-bold' : '')}
+					to={'/cart'}
+				>
+					Cart
+				</NavLink>
 			</li>
-			<li>
-				<NavLink to={'/login'}>Login</NavLink>
-			</li>
+			{!user && (
+				<li>
+					<NavLink
+						className={({ isActive }) => (isActive ? 'font-bold' : '')}
+						to={'/login'}
+					>
+						Login
+					</NavLink>
+				</li>
+			)}
 		</>
 	);
 
@@ -48,7 +82,7 @@ const Header = () => {
 				</div>
 
 				<div className="navbar-center hidden lg:flex">
-					<ul className="menu menu-horizontal px-1">{navLinks}</ul>
+					<ul className="flex gap-10 px-1">{navLinks}</ul>
 				</div>
 				<div className="navbar-end gap-1 md:gap-2">
 					<div className="dropdown dropdown-end">
@@ -98,30 +132,33 @@ const Header = () => {
 						</svg> */}
 						</label>
 					</button>
-					{/* <div className="dropdown dropdown-end">
-					<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-						<div className="w-10 rounded-full">
-							<img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+					{user && (
+						<div className="dropdown dropdown-end">
+							<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+								<div className="w-10 rounded-full">
+									<img src={user.photoURL || userDefault} />
+								</div>
+							</label>
+							<div>
+								<ul
+									tabIndex={0}
+									className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+								>
+									<li>
+										<a className="justify-between">
+											{user?.displayName || 'Profile'}
+										</a>
+									</li>
+									<li>
+										<a>Settings</a>
+									</li>
+									<li>
+										<a onClick={handleLogout}>Logout</a>
+									</li>
+								</ul>
+							</div>
 						</div>
-					</label>
-					<ul
-						tabIndex={0}
-						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-					>
-						<li>
-							<a className="justify-between">
-								Profile
-								<span className="badge">New</span>
-							</a>
-						</li>
-						<li>
-							<a>Settings</a>
-						</li>
-						<li>
-							<a>Logout</a>
-						</li>
-					</ul>
-				</div> */}
+					)}
 				</div>
 			</nav>
 		</div>

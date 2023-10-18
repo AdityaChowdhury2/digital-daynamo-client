@@ -1,7 +1,7 @@
 import Lottie from 'lottie-react';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import RegistrationAnimation from './registrationAnimation.json';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
@@ -9,6 +9,8 @@ import useAuth from '../../hooks/useAuth';
 
 const Register = () => {
 	const [isShow, setIsShow] = useState(false);
+	const navigate = useNavigate();
+	const location = useLocation();
 	const { createUser } = useAuth();
 	const handleSignUp = e => {
 		e.preventDefault();
@@ -22,17 +24,20 @@ const Register = () => {
 		} else if (/^[^!@#$%^&*()_]*$/.test(password)) {
 			console.log('Password must contain at least one special character');
 		} else {
-			createUser(email, password).then(res => console.log(res.user));
+			createUser(email, password).then(res => {
+				console.log(res.user);
+				navigate(location.state || '/');
+			});
 		}
 	};
 	return (
-		<section className="bg-base-100 container  mt-20">
+		<section className="bg-base-100 container  lg:mt-20">
 			<Helmet>
 				<title>Digital Dynamo | Register</title>
 			</Helmet>
-			<div className="flex items-center">
-				<div className="w-1/2">
-					<div className="w-full bg-base-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 ">
+			<div className="flex items-center flex-col-reverse lg:flex-row px-2">
+				<div className="lg:w-1/2 w-full">
+					<div className="bg-base-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 mx-auto">
 						<div className="p-6 space-y-4 sm:p-8 min-w-lg">
 							<div className="flex justify-center">
 								<div className="w-20">
@@ -110,8 +115,12 @@ const Register = () => {
 						</div>
 					</div>
 				</div>
-				<div className="flex-1">
-					<Lottie animationData={RegistrationAnimation} loop={true} />
+				<div className="lg:flex-1 ">
+					<Lottie
+						animationData={RegistrationAnimation}
+						loop={true}
+						className="h-[250px] lg:h-auto"
+					/>
 				</div>
 			</div>
 		</section>
