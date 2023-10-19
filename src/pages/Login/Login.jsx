@@ -7,17 +7,18 @@ import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 const Login = () => {
 	const [isShow, setIsShow] = useState(false);
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { logIn } = useAuth();
-	const handleSignIn = e => {
+	const handleSignIn = async e => {
 		e.preventDefault();
 		const form = e.target;
 		const email = form.email.value;
 		const password = form.password.value;
-		logIn(email, password)
+		await logIn(email, password)
 			.then(res => {
 				console.log(res.user);
 				navigate(location.state || '/');

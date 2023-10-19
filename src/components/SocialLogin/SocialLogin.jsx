@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react';
 import useAuth from '../../hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const SocialLogin = () => {
 	const { googleLogin } = useAuth();
 	const navigate = useNavigate();
@@ -9,6 +10,25 @@ const SocialLogin = () => {
 		googleLogin().then(res => {
 			console.log(res.user);
 			navigate(location.state || '/');
+			const user = {
+				displayName: res.user.displayName,
+				email: res.user.email,
+			};
+			axios
+				.get(`http://127.0.0.1:5000/api/user/${res.user.email}`)
+				.then(res => {
+					console.log(res);
+					if (!res.data.acknowledged) {
+						axios
+							.post('http://127.0.0.1:5000/api/user', user, {
+								headers: { 'Content-Type': 'application/json' },
+							})
+							.then(response => console.log(response))
+							.catch(err => {
+								console.log(err);
+							});
+					}
+				});
 		});
 	};
 	return (

@@ -3,14 +3,44 @@ import ReactStars from 'react-rating-star-with-type';
 import { useLoaderData } from 'react-router-dom';
 // import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
+import useAuth from '../../hooks/useAuth';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const ProductDetails = () => {
 	const loadedProduct = useLoaderData();
-	// const { user } = useAuth();
+	const { user } = useAuth();
 	const [quantity, setQuantity] = useState(1);
+	// console.log(user);
 
-	const handleAddToCart = id => {
-		// const
+	const handleAddToCart = async () => {
+		const response = await axios.get(
+			`http://127.0.0.1:5000/api/user/${user.email}`
+		);
+		const newProduct = { ...loadedProduct, quantity };
+		if (response.data.cart) {
+			const cart = response.data.cart;
+			cart.push(newProduct);
+			axios
+				.patch(`http://127.0.0.1:5000/api/user/${user.email}`, cart, {
+					headers: { 'Content-Type': 'application/json' },
+				})
+				.then(response => {
+					if (response.data.modifiedCount) {
+						Swal.fire({ icon: 'success', title: 'Product added to your cart' });
+					}
+				});
+		} else {
+			axios
+				.patch(`http://127.0.0.1:5000/api/user/${user.email}`, [newProduct], {
+					headers: { 'Content-Type': 'application/json' },
+				})
+				.then(response => {
+					if (response.data.modifiedCount) {
+						Swal.fire({ icon: 'success', title: 'Product added to your cart' });
+					}
+				});
+		}
 	};
 
 	return (
@@ -35,29 +65,30 @@ const ProductDetails = () => {
 						</div>
 						<p className="leading-relaxed">{loadedProduct.short_description}</p>
 
-						<div className="mb-2 flex justify-between">
+						<div className="mb-2 flex items-center mt-3 justify-between">
 							<p className="font-semibold">Quantity:</p>
 							<div className="flex gap-2 relative">
 								<button
-									className="absolute top-1 text-xl left-2"
-									onClick={() => {
-										quantity < 9 && setQuantity(value => value + 1);
-									}}
-								>
-									+
-								</button>
-								<input
-									type="text"
-									value={quantity}
-									className="border  rounded-3xl w-32 mx-auto h-10 px-14"
-								/>
-								<button
-									className="absolute top-0.5 text-2xl right-3"
+									className="absolute top-0.5 text-2xl left-2"
 									onClick={() => {
 										quantity > 1 && setQuantity(value => value - 1);
 									}}
 								>
 									-
+								</button>
+								<input
+									type="text"
+									value={quantity}
+									onChange={e => setQuantity(e.target.value)}
+									className="border  rounded-3xl w-32 mx-auto h-10 px-14"
+								/>
+								<button
+									className="absolute top-1 text-xl right-3"
+									onClick={() => {
+										quantity < 9 && setQuantity(value => value + 1);
+									}}
+								>
+									+
 								</button>
 							</div>
 						</div>
@@ -66,7 +97,7 @@ const ProductDetails = () => {
 								${loadedProduct.price}
 							</span>
 							<button
-								onClick={() => handleAddToCart(loadedProduct._id)}
+								onClick={() => handleAddToCart()}
 								className="flex ml-auto  btn border-0 py-2 px-6 "
 							>
 								Add to Cart

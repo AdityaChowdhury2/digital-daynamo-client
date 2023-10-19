@@ -7,6 +7,7 @@ import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const Register = () => {
 	const [isShow, setIsShow] = useState(false);
@@ -41,6 +42,18 @@ const Register = () => {
 			createUser(email, password).then(res => {
 				console.log(res.user);
 				navigate(location.state || '/');
+				const user = {
+					displayName: res.user?.displayName,
+					email: res.user.email,
+				};
+				axios
+					.post('http://127.0.0.1:5000/api/user', user, {
+						headers: { 'Content-Type': 'application/json' },
+					})
+					.then(response => console.log(response))
+					.catch(err => {
+						console.log(err);
+					});
 			});
 		}
 	};
