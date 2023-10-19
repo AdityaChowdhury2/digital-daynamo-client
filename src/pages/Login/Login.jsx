@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2';
 const Login = () => {
 	const [isShow, setIsShow] = useState(false);
 	const navigate = useNavigate();
@@ -21,8 +22,12 @@ const Login = () => {
 				console.log(res.user);
 				navigate(location.state || '/');
 			})
-			.catch(e => {
-				console.log(e.message);
+			.catch(() => {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Credentials does not match with our database',
+				});
 			});
 	};
 

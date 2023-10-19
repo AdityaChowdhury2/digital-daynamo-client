@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Register = () => {
 	const [isShow, setIsShow] = useState(false);
@@ -18,11 +19,24 @@ const Register = () => {
 		const email = form.email.value;
 		const password = form.password.value;
 		if (password.length < 6) {
-			console.log('Password must be at least 6 characters');
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Password must be at least 6 characters',
+			});
 		} else if (/^[^A-Z]*$/.test(password)) {
-			console.log('Password must contain minimum one capital letter');
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Password must contain minimum one capital letter',
+			});
+			console.log('');
 		} else if (/^[^!@#$%^&*()_]*$/.test(password)) {
-			console.log('Password must contain at least one special character');
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Password must contain minimum one special character',
+			});
 		} else {
 			createUser(email, password).then(res => {
 				console.log(res.user);

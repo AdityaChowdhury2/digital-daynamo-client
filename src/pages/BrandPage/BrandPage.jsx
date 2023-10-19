@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from 'react-router-dom';
+import { Link, useLoaderData, useParams } from 'react-router-dom';
 import BrandsBanner from '../../components/Banner/BrandsBanner';
 import { useEffect, useState } from 'react';
 
@@ -21,22 +21,36 @@ const BrandPage = () => {
 					{brandsProducts.map(product => (
 						<div
 							key={product._id}
-							className="md:w-80 xl:w-96 p-2 m-auto bg-base-200 shadow-lg rounded-2xl"
+							className="md:w-80 xl:w-96 p-2 m-auto bg-base-200 shadow-lg rounded-2xl "
 						>
-							<img
-								src={product.image}
-								alt="adidas"
-								className="w-2/3 p-4 m-auto h-48"
-							/>
+							<div className="block overflow-hidden">
+								<img
+									src={product.image}
+									alt="adidas"
+									className="w-2/3 p-4 m-auto h-48  object-cover transition duration-500 hover:scale-105 "
+								/>
+							</div>
+
 							<div className="p-4 m-3 bg-base-100 rounded-lg">
-								<p className="md:text-xl text-lg font-bold">{product.name}</p>
-								<p className="text-xs ">{product.short_description}</p>
-								<div className="flex items-center justify-between ">
-									<p className="">$98.00</p>
+								<div className="flex justify-between">
+									<p className="text-gray-400">
+										<small>{product.brand}</small>
+									</p>
+									<p className="text-gray-400">
+										<small>{product.type}</small>
+									</p>
 								</div>
+								<p className="md:text-xl text-lg font-bold">{product.name}</p>
+								<p className="text-xs my-2">{product.short_description}</p>
+								<p className="">${product.price}</p>
+
 								<div className="flex justify-between mt-4">
-									<button className="btn">Details</button>
-									<button className="btn">Update</button>
+									<Link to={`/product/${product._id}`}>
+										<button className="btn">Details</button>
+									</Link>
+									<Link to={`/updateProduct/${product._id}`}>
+										<button className="btn">Update</button>
+									</Link>
 								</div>
 							</div>
 						</div>

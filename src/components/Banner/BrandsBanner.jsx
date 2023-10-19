@@ -4,7 +4,6 @@ import { register } from 'swiper/element/bundle';
 // register Swiper custom elements
 register();
 const BrandsBanner = ({ banners }) => {
-	console.log(banners);
 	return (
 		<div className="h-32 md:h-52 lg:h-96">
 			<swiper-container

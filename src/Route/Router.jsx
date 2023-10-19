@@ -7,6 +7,9 @@ import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import PrivateRoute from './PrivateRoute';
 import BrandPage from '../pages/BrandPage/BrandPage';
+import AddProduct from '../pages/AddProduct/AddProduct';
+import UpdateProduct from '../pages/UpdateProduct/UpdateProduct';
+import ProductDetails from '../pages/ProductDetails/ProductDetails';
 
 const Router = createBrowserRouter([
 	{
@@ -27,6 +30,15 @@ const Router = createBrowserRouter([
 				element: <Register />,
 			},
 			{
+				path: '/addProduct',
+				element: (
+					<PrivateRoute>
+						<AddProduct />
+					</PrivateRoute>
+				),
+			},
+
+			{
 				path: '/cart',
 				element: (
 					<PrivateRoute>
@@ -43,6 +55,22 @@ const Router = createBrowserRouter([
 				),
 				loader: ({ params }) =>
 					fetch(`http://127.0.0.1:5000/api/brands/${params.brand}`),
+			},
+			{
+				path: '/updateProduct/:productId',
+				element: (
+					<PrivateRoute>
+						<UpdateProduct />
+					</PrivateRoute>
+				),
+				loader: ({ params }) =>
+					fetch(`http://127.0.0.1:5000/api/product/${params.productId}`),
+			},
+			{
+				path: '/product/:productId',
+				element: <ProductDetails />,
+				loader: ({ params }) =>
+					fetch(`http://127.0.0.1:5000/api/product/${params.productId}`),
 			},
 		],
 	},
