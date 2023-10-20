@@ -15,16 +15,20 @@ const ProductDetails = () => {
 
 	const handleAddToCart = async () => {
 		const response = await axios.get(
-			`http://localhost:5000/api/user/${user.email}`
+			`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`
 		);
 		const newProduct = { ...loadedProduct, quantity };
 		if (response.data.cart) {
 			const cart = response.data.cart;
 			cart.push(newProduct);
 			axios
-				.patch(`http://localhost:5000/api/user/${user.email}`, cart, {
-					headers: { 'Content-Type': 'application/json' },
-				})
+				.patch(
+					`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`,
+					cart,
+					{
+						headers: { 'Content-Type': 'application/json' },
+					}
+				)
 				.then(response => {
 					if (response.data.modifiedCount) {
 						Swal.fire({ icon: 'success', title: 'Product added to your cart' });
@@ -32,9 +36,13 @@ const ProductDetails = () => {
 				});
 		} else {
 			axios
-				.patch(`http://localhost:5000/api/user/${user.email}`, [newProduct], {
-					headers: { 'Content-Type': 'application/json' },
-				})
+				.patch(
+					`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`,
+					[newProduct],
+					{
+						headers: { 'Content-Type': 'application/json' },
+					}
+				)
 				.then(response => {
 					if (response.data.modifiedCount) {
 						Swal.fire({ icon: 'success', title: 'Product added to your cart' });
@@ -50,20 +58,22 @@ const ProductDetails = () => {
 					<img
 						alt="ecommerce"
 						className="md:w-1/2 w-full lg:h-auto h-64  rounded mx-auto"
-						src={loadedProduct.image}
+						src={loadedProduct?.image}
 					/>
 					<div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
 						<h2 className="text-sm title-font  tracking-widest">
-							{loadedProduct.brand.toUpperCase()}
+							{loadedProduct?.brand?.toUpperCase()}
 						</h2>
 						<h1 className=" text-3xl title-font font-medium mb-1">
-							{loadedProduct.name}
+							{loadedProduct?.name}
 						</h1>
 						<div className="my-2 flex gap-3">
-							<ReactStars value={loadedProduct.rating} />({loadedProduct.rating}
-							)
+							<ReactStars value={loadedProduct?.rating} />(
+							{loadedProduct?.rating})
 						</div>
-						<p className="leading-relaxed">{loadedProduct.short_description}</p>
+						<p className="leading-relaxed">
+							{loadedProduct?.short_description}
+						</p>
 
 						<div className="mb-2 flex items-center mt-3 justify-between">
 							<p className="font-semibold">Quantity:</p>
@@ -96,7 +106,7 @@ const ProductDetails = () => {
 						</div>
 						<div className="flex mt-12 items-center">
 							<span className="title-font font-medium text-2xl ">
-								${loadedProduct.price}
+								${loadedProduct?.price}
 							</span>
 							<button
 								onClick={() => handleAddToCart()}

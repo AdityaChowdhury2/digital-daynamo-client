@@ -6,29 +6,27 @@ const SocialLogin = () => {
 	const { googleLogin } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
-	const handleGoogleLogin = () => {
-		googleLogin().then(res => {
-			console.log(res.user);
+	const handleGoogleLogin = async () => {
+		await googleLogin().then(async res => {
 			navigate(location.state || '/');
 			const user = {
 				displayName: res.user.displayName,
 				email: res.user.email,
+				uid: res.user.uid,
 			};
-			axios
-				.get(`http://localhost:5000/api/user/${res.user.email}`)
-				.then(res => {
-					console.log(res);
-					if (!res.data.acknowledged) {
-						axios
-							.post('http://localhost:5000/api/user', user, {
-								headers: { 'Content-Type': 'application/json' },
-							})
-							.then(response => console.log(response))
-							.catch(err => {
-								console.log(err);
-							});
-					}
-				});
+			const response = await axios
+				.get(
+					`https://digital-dynamo-server.vercel.app/api/user/${res.user.uid}`
+				)
+				.catch(err => console.log(err));
+			if (!response?.data?.acknowledged) {
+				const response = await axios
+					.post('https://digital-dynamo-server.vercel.app/api/user', user, {
+						headers: { 'Content-Type': 'application/json' },
+					})
+					.catch(err => console.log(err));
+				console.log(response?.data);
+			}
 		});
 	};
 	return (

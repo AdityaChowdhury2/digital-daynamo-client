@@ -45,8 +45,9 @@ const Register = () => {
 				const user = {
 					displayName: res.user.displayName,
 					email: res.user.email,
+					uid: res.user.uid,
 				};
-				axios.post('http://localhost:5000/api/user', user, {
+				axios.post('https://digital-dynamo-server.vercel.app/api/user', user, {
 					headers: { 'Content-Type': 'application/json' },
 				});
 				// .then(response => console.log(response))
