@@ -87,7 +87,9 @@ const UpdateProduct = () => {
 								name="name"
 								id="name"
 								defaultValue={loadedProduct.name}
-								className="input input-bordered w-full"
+								className="input input-bordered w-full bg-zinc-200 border-gray-300 
+								dark:text-zinc-100 
+								dark:bg-gray-900 focus:outline-gray-300"
 								placeholder="Type product name"
 								required
 							/>
@@ -101,7 +103,9 @@ const UpdateProduct = () => {
 								name="imageUrl"
 								id="url"
 								defaultValue={loadedProduct.image}
-								className="input input-bordered w-full"
+								className="input input-bordered w-full bg-zinc-200 border-gray-300 
+								dark:text-zinc-100 
+								dark:bg-gray-900 focus:outline-gray-300"
 								placeholder="https://"
 								required
 							/>
@@ -117,7 +121,7 @@ const UpdateProduct = () => {
 								id="brand"
 								name="brand"
 								defaultValue={loadedProduct.brand}
-								className=" border border-gray-300 text-sm rounded-lg  block w-full p-2.5 "
+								className="border bg-zinc-200 dark:bg-gray-900 border-gray-300 text-sm rounded-lg  block w-full p-2.5"
 								required
 							>
 								<option value="">Select brand</option>
@@ -141,7 +145,9 @@ const UpdateProduct = () => {
 								name="price"
 								id="price"
 								defaultValue={loadedProduct.price}
-								className="input input-bordered w-full"
+								className="input input-bordered w-full bg-zinc-200 border-gray-300 
+								dark:text-zinc-100 
+								dark:bg-gray-900 focus:outline-gray-300"
 								placeholder="$2999"
 								required
 							/>
@@ -153,7 +159,7 @@ const UpdateProduct = () => {
 							<select
 								id="type"
 								name="type"
-								className=" border border-gray-300 text-sm rounded-lg  block w-full p-2.5 "
+								className="border bg-zinc-200 dark:bg-gray-900 border-gray-300 text-sm rounded-lg  block w-full p-2.5"
 								defaultValue={loadedProduct.type}
 								required
 							>
@@ -194,16 +200,26 @@ const UpdateProduct = () => {
 								name="description"
 								rows="8"
 								defaultValue={loadedProduct.short_description}
-								className="block p-2.5 w-full text-sm rounded-lg border border-gray-300 "
+								className="block p-2.5  text-sm rounded-lg border w-full bg-zinc-200 border-gray-300 
+								dark:text-zinc-100 
+								dark:bg-gray-900
+								focus:outline-gray-300 
+								focus:outline-2 focus:outline-offset-2"
 								placeholder="Product description here"
 							></textarea>
 						</div>
 					</div>
-					<div className="flex justify-around">
-						<button type="submit" className="btn mt-10">
+					<div className="flex justify-around mt-10">
+						<button
+							type="submit"
+							className="border-0 dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  dark:hover:bg-gray-800 py-2 px-6  rounded text-lg"
+						>
 							Update product
 						</button>
-						<div onClick={handleDelete} className="btn btn-error mt-10">
+						<div
+							onClick={handleDelete}
+							className=" border-0 dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  hover:cursor-pointer dark:hover:bg-gray-800 py-2 px-6  rounded text-lg"
+						>
 							Delete product
 						</div>
 					</div>

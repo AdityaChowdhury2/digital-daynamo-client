@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
-import axios from 'axios';
+
 const Login = () => {
 	const [isShow, setIsShow] = useState(false);
 	const navigate = useNavigate();
@@ -33,14 +33,14 @@ const Login = () => {
 	};
 
 	return (
-		<section className="bg-base-100 container  mt-20">
+		<section className=" container  mt-20">
 			<Helmet>
 				<title>Digital Dynamo | Login</title>
 			</Helmet>
 			<div className="flex items-center flex-col-reverse lg:flex-row px-2">
 				<div className="lg:w-1/2 w-full">
-					<div className="bg-base-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 mx-auto">
-						<div className="p-6 space-y-4 sm:p-8 min-w-lg">
+					<div className="rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 mx-auto">
+						<div className="p-6 space-y-4 sm:p-8 min-w-lg bg-zinc-50 dark:bg-gray-800 rounded-lg">
 							<div className="flex justify-center">
 								<div className="w-20">
 									<img
@@ -66,7 +66,9 @@ const Login = () => {
 										name="email"
 										id="email"
 										placeholder="name@company.com"
-										className="input input-bordered w-full "
+										className="input input-bordered w-full bg-zinc-200 border-gray-300 
+										dark:text-zinc-100 
+										dark:bg-gray-900 focus:outline-gray-300"
 									/>
 								</div>
 								<div>
@@ -82,7 +84,9 @@ const Login = () => {
 											name="password"
 											id="password"
 											placeholder="enter your password"
-											className="input input-bordered w-full "
+											className="input input-bordered w-full bg-zinc-200 border-gray-300 
+											dark:text-zinc-100 
+											dark:bg-gray-900 focus:outline-gray-300"
 										/>
 										<div
 											className="absolute right-3 top-1/4 hover:cursor-pointer"
@@ -101,7 +105,7 @@ const Login = () => {
 
 								<button
 									type="submit"
-									className="w-full bg-base-200 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-base-300"
+									className="w-full dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 border-0 py-2 px-6 dark:hover:bg-gray-700 focus:outline-none  rounded text-lg"
 								>
 									Sign in
 								</button>

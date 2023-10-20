@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import userDefault from '/user.svg';
+import Logo from '../Logo/Logo';
 
 const Header = () => {
 	const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -23,7 +24,13 @@ const Header = () => {
 
 	useEffect(() => {
 		localStorage.setItem('theme', theme);
-		document.querySelector('html').setAttribute('data-theme', theme);
+		if (theme === 'dark') {
+			document.querySelector('html').classList.remove('light');
+			document.querySelector('html').classList.add('dark');
+		} else {
+			document.querySelector('html').classList.remove('dark');
+			document.querySelector('html').classList.add('light');
+		}
 	}, [theme]);
 
 	const navLinks = (
@@ -66,32 +73,26 @@ const Header = () => {
 	);
 
 	return (
-		<div className="bg-base-200">
+		<div className=" sticky inset-0 z-20 bg-gray-300  bg-opacity-80 dark:bg-gray-800 text-zinc-800 dark:text-zinc-300">
 			<nav className="navbar container">
 				<div className="navbar-start">
-					<Link to="/" className="flex items-center">
-						<img
-							src="https://i.ibb.co/LPv0gD7/digidynamo-Logo.png"
-							className="h-8 mr-3"
-							alt="Flowbite Logo"
-						/>
-						<span className="self-center md:text-2xl font-semibold whitespace-nowrap  ">
-							Digital Dynamo
-						</span>
-					</Link>
+					<Logo />
 				</div>
 
 				<div className="navbar-center hidden lg:flex">
 					<ul className="flex gap-10 px-1">{navLinks}</ul>
 				</div>
-				<div className="navbar-end gap-1 md:gap-2">
+				<div className="navbar-end items-center gap-1 md:gap-2">
 					<div className="dropdown dropdown-end">
-						<label tabIndex={0} className="btn btn-ghost lg:hidden">
+						<label
+							tabIndex={0}
+							className="btn border-transparent hover:bg-gray-300 dark:hover:bg-gray-900 hover:border-transparent lg:hidden dark:text-zinc-300"
+						>
 							<Icon icon="ri:menu-3-fill" width={'20'} />
 						</label>
 						<ul
 							tabIndex={0}
-							className="menu menu-sm dropdown-content mt-3 z-20 p-2 shadow bg-base-100  rounded-box w-52"
+							className="menu menu-sm dropdown-content mt-3 z-20 p-2 shadow bg-gray-100 dark:bg-gray-800 dark:text-zinc-300 rounded-box w-52"
 						>
 							{navLinks}
 						</ul>
@@ -102,33 +103,44 @@ const Header = () => {
 								theme === 'light' ? '' : 'swap-active'
 							} swap-rotate`}
 						>
-							<Icon icon="noto:sun" className="swap-on" width={30} />
+							<Icon
+								icon="noto:sun"
+								className="swap-on"
+								width={32}
+								height={32}
+							/>
 							<Icon
 								icon="streamline-emojis:new-moon"
 								className="swap-off"
-								width={30}
+								width={32}
+								height={32}
 							/>
 						</label>
 					</button>
 					{user && (
 						<div className="dropdown dropdown-end">
 							<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-								<div className="w-10 rounded-full">
+								<div className="w-8 rounded-full">
 									<img src={user.photoURL || userDefault} />
 								</div>
 							</label>
 							<div>
 								<ul
 									tabIndex={0}
-									className="menu menu-sm dropdown-content mt-3 z-30 p-2 shadow bg-base-100 rounded-box w-52"
+									className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-gray-100 text-zinc-800 dark:bg-gray-800 dark:text-zinc-300 rounded-box w-52"
 								>
 									<li>
-										<a className="justify-between">
+										<NavLink
+											to={`/profile/${user?.email}`}
+											className={({ isActive }) =>
+												isActive ? 'font-bold' : ''
+											}
+										>
 											{user?.displayName || 'Profile'}
-										</a>
+										</NavLink>
 									</li>
 									<li>
-										<a onClick={handleLogout}>Logout</a>
+										<div onClick={handleLogout}>Logout</div>
 									</li>
 								</ul>
 							</div>

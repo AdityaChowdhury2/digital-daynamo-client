@@ -75,7 +75,7 @@ const ProductDetails = () => {
 
 						<div className="mb-2 flex items-center mt-3 justify-between">
 							<p className="font-semibold">Quantity:</p>
-							<div className="flex gap-2 relative">
+							<div className="flex gap-2 relative text-zinc-800 dark:text-zinc-300">
 								<button
 									className="absolute top-0.5 text-2xl left-2"
 									onClick={() => {
@@ -88,7 +88,9 @@ const ProductDetails = () => {
 									type="text"
 									value={quantity}
 									onChange={e => setQuantity(e.target.value)}
-									className="border  rounded-3xl w-32 mx-auto h-10 px-14"
+									className="input input-bordered bg-zinc-200 border-gray-300 
+									dark:text-zinc-100 
+									dark:bg-gray-900 focus:outline-gray-300 rounded-3xl w-32 mx-auto h-10 px-14"
 								/>
 								<button
 									className="absolute top-1 text-xl right-3"
@@ -106,11 +108,11 @@ const ProductDetails = () => {
 							</span>
 							<button
 								onClick={() => handleAddToCart()}
-								className="flex ml-auto  btn border-0 py-2 px-6 "
+								className="flex ml-auto dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  dark:hover:bg-gray-800 btn border-0 py-2 px-6 "
 							>
 								Add to Cart
 							</button>
-							<button className="rounded-full bg-base-200 w-10 h-10  p-0 border-0 inline-flex items-center justify-center  ml-4">
+							<button className=" dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  dark:hover:bg-gray-800 rounded-full w-10 h-10  p-0 border-0 inline-flex items-center justify-center  ml-4">
 								<Icon icon="bi:heart-fill" />
 							</button>
 						</div>

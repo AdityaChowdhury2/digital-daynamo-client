@@ -2,15 +2,20 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
 	return (
-		<footer className="px-4 divide-y bg-base-300 mt-12 ">
+		<footer className="px-4 divide-y bg-zinc-200 divide-gray-700 dark:divide-gray-100 text-zinc-800 dark:text-zinc-300 dark:bg-gray-800 mt-12 ">
 			<div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
 				<div className="lg:w-1/3">
 					<div className="flex justify-center space-x-3 lg:justify-start">
-						<div className="flex flex-col items-start gap-2">
+						<div className="flex flex-col lg:items-start items-center  gap-2">
 							<Link to="/">
 								<img
-									src="https://i.ibb.co/LPv0gD7/digidynamo-Logo.png"
-									className="h-8 mr-3"
+									src="https://i.ibb.co/2hr24MN/digidynamo-Logo.png"
+									className="h-8 mr-3 flex dark:hidden"
+									alt="Flowbite Logo"
+								/>
+								<img
+									src="https://i.ibb.co/k5FMYdJ/digidynamo-Logo-Dark.png"
+									className="h-8 mr-3 hidden dark:flex"
 									alt="Flowbite Logo"
 								/>
 							</Link>
@@ -22,7 +27,7 @@ const Footer = () => {
 				</div>
 				<div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
 					<div className="space-y-3">
-						<h3 className="tracki uppercase dark:text-gray-50">Product</h3>
+						<h3 className="tracki uppercase">Product</h3>
 						<ul className="space-y-1">
 							<li>
 								<a rel="noopener noreferrer" href="#">
@@ -47,7 +52,7 @@ const Footer = () => {
 						</ul>
 					</div>
 					<div className="space-y-3">
-						<h3 className="tracki uppercase dark:text-gray-50">Company</h3>
+						<h3 className="tracki uppercase ">Company</h3>
 						<ul className="space-y-1">
 							<li>
 								<a rel="noopener noreferrer" href="#">
@@ -62,7 +67,7 @@ const Footer = () => {
 						</ul>
 					</div>
 					<div className="space-y-3">
-						<h3 className="uppercase dark:text-gray-50">Developers</h3>
+						<h3 className="uppercase ">Developers</h3>
 						<ul className="space-y-1">
 							<li>
 								<a rel="noopener noreferrer" href="#">
@@ -82,7 +87,7 @@ const Footer = () => {
 						</ul>
 					</div>
 					<div className="space-y-3">
-						<div className="uppercase dark:text-gray-50">Social media</div>
+						<div className="uppercase ">Social media</div>
 						<div className="flex justify-start space-x-3">
 							<a
 								rel="noopener noreferrer"
@@ -132,7 +137,7 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
-			<div className="py-6 text-sm text-center dark:text-gray-400">
+			<div className="py-6 text-sm text-center">
 				© 1968 Company Co. All rights reserved.
 			</div>
 		</footer>

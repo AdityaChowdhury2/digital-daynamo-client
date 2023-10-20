@@ -42,7 +42,7 @@ const AddProduct = () => {
 		}
 	};
 	return (
-		<section className="">
+		<section>
 			<div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
 				<h2 className="mb-4 text-xl font-bold">Add a new product</h2>
 				<form onSubmit={handleSubmit}>
@@ -55,7 +55,10 @@ const AddProduct = () => {
 								type="text"
 								name="name"
 								id="name"
-								className="input input-bordered w-full"
+								className="input input-bordered w-full bg-zinc-200 border-gray-300 
+								dark:text-zinc-100 
+								dark:bg-gray-900 focus:outline-gray-300
+								"
 								placeholder="Type product name"
 								required
 							/>
@@ -68,7 +71,11 @@ const AddProduct = () => {
 								type="text"
 								name="imageUrl"
 								id="url"
-								className="input input-bordered w-full"
+								className="input input-bordered w-full bg-zinc-200 border-gray-300 
+								dark:text-zinc-100 
+								dark:bg-gray-900
+								focus:outline-gray-300
+								"
 								placeholder="https://"
 								required
 							/>
@@ -83,7 +90,7 @@ const AddProduct = () => {
 							<select
 								id="brand"
 								name="brand"
-								className=" border border-gray-300 text-sm rounded-lg  block w-full p-2.5 "
+								className=" border bg-zinc-200 dark:bg-gray-900 border-gray-300 text-sm rounded-lg  block w-full p-2.5 "
 								required
 							>
 								<option value="">Select brand</option>
@@ -106,7 +113,10 @@ const AddProduct = () => {
 								type="number"
 								name="price"
 								id="price"
-								className="input input-bordered w-full"
+								className="input input-bordered w-full bg-zinc-200 border-gray-300 
+								dark:text-zinc-100 
+								dark:bg-gray-900
+								focus:outline-gray-300"
 								placeholder="$2999"
 								required
 							/>
@@ -118,7 +128,7 @@ const AddProduct = () => {
 							<select
 								id="type"
 								name="type"
-								className=" border border-gray-300 text-sm rounded-lg  block w-full p-2.5 "
+								className="border bg-zinc-200 dark:bg-gray-900 border-gray-300 text-sm rounded-lg  block w-full p-2.5 "
 								required
 							>
 								<option value="">Select type</option>
@@ -156,12 +166,18 @@ const AddProduct = () => {
 								id="description"
 								name="description"
 								rows="8"
-								className="block p-2.5 w-full text-sm rounded-lg border border-gray-300 "
+								className="block p-2.5  text-sm rounded-lg border w-full bg-zinc-200 border-gray-300 
+								dark:text-zinc-100 
+								dark:bg-gray-900
+								focus:outline-gray-300 focus:outline-2 focus:outline-offset-2"
 								placeholder="Product description here"
 							></textarea>
 						</div>
 					</div>
-					<button type="submit" className="w-full btn mt-10">
+					<button
+						type="submit"
+						className="w-full mt-10 border-0 dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  dark:hover:bg-gray-800 py-2 px-6  rounded text-lg"
+					>
 						Add product
 					</button>
 				</form>

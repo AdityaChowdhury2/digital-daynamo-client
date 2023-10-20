@@ -10,6 +10,7 @@ import BrandPage from '../pages/BrandPage/BrandPage';
 import AddProduct from '../pages/AddProduct/AddProduct';
 import UpdateProduct from '../pages/UpdateProduct/UpdateProduct';
 import ProductDetails from '../pages/ProductDetails/ProductDetails';
+import Profile from '../pages/Profile/Profile';
 
 const Router = createBrowserRouter([
 	{
@@ -43,6 +44,14 @@ const Router = createBrowserRouter([
 				element: (
 					<PrivateRoute>
 						<Cart />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: '/profile/:email',
+				element: (
+					<PrivateRoute>
+						<Profile />
 					</PrivateRoute>
 				),
 			},

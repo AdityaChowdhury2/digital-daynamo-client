@@ -23,17 +23,18 @@ const BrandPage = () => {
 					{brandsProducts.map(product => (
 						<div
 							key={product._id}
-							className="md:w-80 xl:w-96 p-2 m-auto bg-base-200 shadow-lg rounded-2xl "
+							className="md:w-80 xl:w-96 p-2 m-auto bg-gray-100 dark:bg-gray-800 
+							 shadow-lg rounded-2xl "
 						>
 							<div className="block overflow-hidden">
 								<img
 									src={product.image}
 									alt="adidas"
-									className="w-2/3 p-4 m-auto h-48  object-cover transition duration-500 hover:scale-105 "
+									className="w-2/3 p-4 m-auto h-48 hover:cursor-pointer object-cover transition duration-500 hover:scale-105 "
 								/>
 							</div>
 
-							<div className="p-4 m-3 bg-base-100 rounded-lg">
+							<div className="p-4 m-3  rounded-lg">
 								<div className="flex justify-between">
 									<p className="text-gray-400">
 										<small>{product.brand}</small>
@@ -48,10 +49,14 @@ const BrandPage = () => {
 
 								<div className="flex justify-between mt-4">
 									<Link to={`/product/${product._id}`}>
-										<button className="btn">Details</button>
+										<button className="dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  dark:hover:bg-gray-700 btn border-0">
+											Details
+										</button>
 									</Link>
 									<Link to={`/updateProduct/${product._id}`}>
-										<button className="btn">Update</button>
+										<button className="dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  dark:hover:bg-gray-700 btn border-0">
+											Update
+										</button>
 									</Link>
 								</div>
 							</div>
