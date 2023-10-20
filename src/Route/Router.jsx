@@ -57,11 +57,7 @@ const Router = createBrowserRouter([
 			},
 			{
 				path: '/brands/:brand',
-				element: (
-					<PrivateRoute>
-						<BrandPage />
-					</PrivateRoute>
-				),
+				element: <BrandPage />,
 				loader: ({ params }) =>
 					fetch(
 						`https://digital-dynamo-server.vercel.app/api/brands/${params.brand}`

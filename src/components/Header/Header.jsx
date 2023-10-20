@@ -119,7 +119,10 @@ const Header = () => {
 					</button>
 					{user && (
 						<div className="dropdown dropdown-end">
-							<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+							<label
+								tabIndex={0}
+								className="btn btn-ghost btn-circle border-2 hover:border-zinc-400 dark:hover:border-gray-700 avatar"
+							>
 								<div className="w-8 rounded-full">
 									<img src={user.photoURL || userDefault} />
 								</div>
@@ -127,7 +130,7 @@ const Header = () => {
 							<div>
 								<ul
 									tabIndex={0}
-									className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-gray-100 text-zinc-800 dark:bg-gray-800 dark:text-zinc-300 rounded-box w-52"
+									className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-gray-100 text-zinc-800 dark:bg-gray-800 dark:text-zinc-300 rounded-box w-52 "
 								>
 									<li>
 										<NavLink
