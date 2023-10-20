@@ -43,17 +43,16 @@ const Register = () => {
 				console.log(res.user);
 				navigate(location.state || '/');
 				const user = {
-					displayName: res.user?.displayName,
+					displayName: res.user.displayName,
 					email: res.user.email,
 				};
-				axios
-					.post('https://digital-dynamo-server.vercel.app/api/user', user, {
-						headers: { 'Content-Type': 'application/json' },
-					})
-					.then(response => console.log(response))
-					.catch(err => {
-						console.log(err);
-					});
+				axios.post('http://localhost:5000/api/user', user, {
+					headers: { 'Content-Type': 'application/json' },
+				});
+				// .then(response => console.log(response))
+				// .catch(err => {
+				// 	console.log(err);
+				// });
 			});
 		}
 	};

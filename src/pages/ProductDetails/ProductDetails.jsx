@@ -15,20 +15,16 @@ const ProductDetails = () => {
 
 	const handleAddToCart = async () => {
 		const response = await axios.get(
-			`https://digital-dynamo-server.vercel.app/api/user/${user.email}`
+			`http://localhost:5000/api/user/${user.email}`
 		);
 		const newProduct = { ...loadedProduct, quantity };
 		if (response.data.cart) {
 			const cart = response.data.cart;
 			cart.push(newProduct);
 			axios
-				.patch(
-					`https://digital-dynamo-server.vercel.app/api/user/${user.email}`,
-					cart,
-					{
-						headers: { 'Content-Type': 'application/json' },
-					}
-				)
+				.patch(`http://localhost:5000/api/user/${user.email}`, cart, {
+					headers: { 'Content-Type': 'application/json' },
+				})
 				.then(response => {
 					if (response.data.modifiedCount) {
 						Swal.fire({ icon: 'success', title: 'Product added to your cart' });
@@ -36,13 +32,9 @@ const ProductDetails = () => {
 				});
 		} else {
 			axios
-				.patch(
-					`https://digital-dynamo-server.vercel.app/api/user/${user.email}`,
-					[newProduct],
-					{
-						headers: { 'Content-Type': 'application/json' },
-					}
-				)
+				.patch(`http://localhost:5000/api/user/${user.email}`, [newProduct], {
+					headers: { 'Content-Type': 'application/json' },
+				})
 				.then(response => {
 					if (response.data.modifiedCount) {
 						Swal.fire({ icon: 'success', title: 'Product added to your cart' });
@@ -108,7 +100,7 @@ const ProductDetails = () => {
 							</span>
 							<button
 								onClick={() => handleAddToCart()}
-								className="flex ml-auto dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  dark:hover:bg-gray-800 btn border-0 py-2 px-6 "
+								className="flex ml-auto dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  dark:hover:bg-gray-800 btn border-0 py-2 px-4 md:px-6 "
 							>
 								Add to Cart
 							</button>

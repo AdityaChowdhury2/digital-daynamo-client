@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 const Brands = () => {
 	const [brands, setBrands] = useState([]);
 	useEffect(() => {
-		fetch('https://digital-dynamo-server.vercel.app/api/brands')
+		fetch('http://localhost:5000/api/brands')
 			.then(res => res.json())
 			.then(data => setBrands(data));
 	}, []);
 	return (
-		<section className="container my-10 px-2">
+		<section className="container my-10 ">
 			<div className="flex flex-col items-center gap-4 justify-center mb-10">
 				<h3 className=" font-bold text-3xl">Browse Brands</h3>
 				<div className="relative w-32 h-2  bg-slate-600 dark:bg-slate-200 rounded-lg">
@@ -17,7 +17,7 @@ const Brands = () => {
 				</div>
 			</div>
 			{brands.length ? (
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
 					{brands.map(brand => (
 						<Link key={brand._id} to={`/brands/${brand.name}`}>
 							<div className="relative grid h-[25rem] w-full max-w-[28rem] flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center ">

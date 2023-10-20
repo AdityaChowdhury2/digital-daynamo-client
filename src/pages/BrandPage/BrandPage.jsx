@@ -8,9 +8,7 @@ const BrandPage = () => {
 	const params = useParams();
 
 	useEffect(() => {
-		fetch(
-			`https://digital-dynamo-server.vercel.app/api/banners/${params.brand}`
-		)
+		fetch(`http://localhost:5000/api/banners/${params.brand}`)
 			.then(res => res.json())
 			.then(data => setBanners(data.banner_images));
 	}, [params.brand]);
@@ -19,7 +17,7 @@ const BrandPage = () => {
 		<div>
 			{banners.length && <BrandsBanner banners={banners} />}
 			{brandsProducts.length ? (
-				<div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 gap-5 px-2">
+				<div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 gap-5 px-4">
 					{brandsProducts.map(product => (
 						<div
 							key={product._id}

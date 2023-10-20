@@ -25,7 +25,7 @@ const AddProduct = () => {
 			rating,
 		};
 		const response = await axios
-			.post(`https://digital-dynamo-server.vercel.app/api/products/`, product, {
+			.post(`http://localhost:5000/api/products/`, product, {
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.catch(e => {

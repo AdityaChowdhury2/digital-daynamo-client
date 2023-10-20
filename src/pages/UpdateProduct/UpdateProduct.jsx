@@ -22,9 +22,7 @@ const UpdateProduct = () => {
 		}).then(result => {
 			if (result.isConfirmed) {
 				axios
-					.delete(
-						`https://digital-dynamo-server.vercel.app/api/product/${loadedProduct._id}`
-					)
+					.delete(`http://localhost:5000/api/product/${loadedProduct._id}`)
 					.then(response => {
 						if (response.data.deletedCount) {
 							Swal.fire('Deleted!', 'Your Item has been deleted.', 'success');
@@ -57,13 +55,9 @@ const UpdateProduct = () => {
 		};
 
 		const response = await axios
-			.put(
-				`https://digital-dynamo-server.vercel.app/api/product/${loadedProduct._id}`,
-				product,
-				{
-					headers: { 'Content-Type': 'application/json' },
-				}
-			)
+			.put(`http://localhost:5000/api/product/${loadedProduct._id}`, product, {
+				headers: { 'Content-Type': 'application/json' },
+			})
 			.catch(e => {
 				console.log(e.message);
 			});
@@ -214,13 +208,13 @@ const UpdateProduct = () => {
 							type="submit"
 							className="border-0 dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  dark:hover:bg-gray-800 py-2 px-6  rounded text-lg"
 						>
-							Update product
+							Update
 						</button>
 						<div
 							onClick={handleDelete}
 							className=" border-0 dark:bg-gray-600 bg-zinc-300 hover:bg-zinc-400 focus:outline-none  hover:cursor-pointer dark:hover:bg-gray-800 py-2 px-6  rounded text-lg"
 						>
-							Delete product
+							Delete
 						</div>
 					</div>
 				</form>

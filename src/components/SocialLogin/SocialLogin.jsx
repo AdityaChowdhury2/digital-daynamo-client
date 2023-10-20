@@ -15,14 +15,12 @@ const SocialLogin = () => {
 				email: res.user.email,
 			};
 			axios
-				.get(
-					`https://digital-dynamo-server.vercel.app/api/user/${res.user.email}`
-				)
+				.get(`http://localhost:5000/api/user/${res.user.email}`)
 				.then(res => {
 					console.log(res);
 					if (!res.data.acknowledged) {
 						axios
-							.post('https://digital-dynamo-server.vercel.app/api/user', user, {
+							.post('http://localhost:5000/api/user', user, {
 								headers: { 'Content-Type': 'application/json' },
 							})
 							.then(response => console.log(response))

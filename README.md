@@ -1,8 +1,20 @@
-# React + Vite
+# Digital Dynamo - Your Ultimate Brand-based Shopping Destination
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Special Features
 
-Currently, two official plugins are available:
+- Theme toggler is added, user can change theme.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- Responsive design
+- User's login and registration is handled by firebase
+- Brands name and brands logo showed in home page which are coming from mongodb.
+- A logged in user can add product in add product page.
+- In product details page user can add the product in cart.
+- User can update the product details and also can delete the product.
+- In cart user can delete an specific product.
+- In Login and registration toast will be shown when some error occurs
+
+## 🔗 Links
+
+[Live Link](https://digital-dynamo.web.app)
