@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import ReactStars from 'react-rating-star-with-type';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
@@ -8,7 +8,35 @@ import Swal from 'sweetalert2';
 const UpdateProduct = () => {
 	const loadedProduct = useLoaderData();
 	const [rating, setRating] = useState(loadedProduct.rating);
+	const navigate = useNavigate();
 	console.log(loadedProduct);
+	const handleDelete = () => {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!',
+		}).then(result => {
+			if (result.isConfirmed) {
+				axios
+					.delete(
+						`https://digital-dynamo-server.vercel.app/api/product/${loadedProduct._id}`
+					)
+					.then(response => {
+						if (response.data.deletedCount) {
+							Swal.fire('Deleted!', 'Your Item has been deleted.', 'success');
+							navigate('/');
+						}
+					})
+					.catch(e => {
+						console.log(e);
+					});
+			}
+		});
+	};
 	const handleUpdate = async e => {
 		e.preventDefault();
 		const form = e.target;
@@ -27,10 +55,15 @@ const UpdateProduct = () => {
 			short_description,
 			rating,
 		};
+
 		const response = await axios
-			.put(`http://127.0.0.1:5000/api/product/${loadedProduct._id}`, product, {
-				headers: { 'Content-Type': 'application/json' },
-			})
+			.put(
+				`https://digital-dynamo-server.vercel.app/api/product/${loadedProduct._id}`,
+				product,
+				{
+					headers: { 'Content-Type': 'application/json' },
+				}
+			)
 			.catch(e => {
 				console.log(e.message);
 			});
@@ -42,7 +75,7 @@ const UpdateProduct = () => {
 	return (
 		<section className="">
 			<div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-				<h2 className="mb-4 text-xl font-bold">Add a new product</h2>
+				<h2 className="mb-4 text-xl font-bold">Update product</h2>
 				<form onSubmit={handleUpdate}>
 					<div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
 						<div className="sm:col-span-2">
@@ -166,9 +199,14 @@ const UpdateProduct = () => {
 							></textarea>
 						</div>
 					</div>
-					<button type="submit" className="w-full btn mt-10">
-						Update product
-					</button>
+					<div className="flex justify-around">
+						<button type="submit" className="btn mt-10">
+							Update product
+						</button>
+						<div onClick={handleDelete} className="btn btn-error mt-10">
+							Delete product
+						</div>
+					</div>
 				</form>
 			</div>
 		</section>

@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import userDefault from '/user.svg';
 
 const Header = () => {
-	const [theme, setTheme] = useState(localStorage.getItem('theme') || 'garden');
+	const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 	const { user, logOut } = useAuth();
 
 	const handleThemeChange = () => {
-		theme === 'garden' ? setTheme('night') : setTheme('garden');
+		theme === 'light' ? setTheme('dark') : setTheme('light');
 	};
 	const handleLogout = () => {
 		logOut()
@@ -69,7 +69,7 @@ const Header = () => {
 		<div className="bg-base-200">
 			<nav className="navbar container">
 				<div className="navbar-start">
-					<a href="/" className="flex items-center">
+					<Link to="/" className="flex items-center">
 						<img
 							src="https://i.ibb.co/LPv0gD7/digidynamo-Logo.png"
 							className="h-8 mr-3"
@@ -78,7 +78,7 @@ const Header = () => {
 						<span className="self-center md:text-2xl font-semibold whitespace-nowrap  ">
 							Digital Dynamo
 						</span>
-					</a>
+					</Link>
 				</div>
 
 				<div className="navbar-center hidden lg:flex">
@@ -99,7 +99,7 @@ const Header = () => {
 					<button onClick={handleThemeChange}>
 						<label
 							className={`swap ${
-								theme === 'garden' ? '' : 'swap-active'
+								theme === 'light' ? '' : 'swap-active'
 							} swap-rotate`}
 						>
 							<Icon icon="noto:sun" className="swap-on" width={30} />
@@ -126,9 +126,6 @@ const Header = () => {
 										<a className="justify-between">
 											{user?.displayName || 'Profile'}
 										</a>
-									</li>
-									<li>
-										<a>Settings</a>
 									</li>
 									<li>
 										<a onClick={handleLogout}>Logout</a>

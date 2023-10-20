@@ -8,7 +8,9 @@ const BrandPage = () => {
 	const params = useParams();
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:5000/api/banners/${params.brand}`)
+		fetch(
+			`https://digital-dynamo-server.vercel.app/api/banners/${params.brand}`
+		)
 			.then(res => res.json())
 			.then(data => setBanners(data.banner_images));
 	}, [params.brand]);

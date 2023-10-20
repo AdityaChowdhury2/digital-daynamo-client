@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom';
 const Brands = () => {
 	const [brands, setBrands] = useState([]);
 	useEffect(() => {
-		fetch('http://localhost:5000/api/brands')
+		fetch('https://digital-dynamo-server.vercel.app/api/brands')
 			.then(res => res.json())
 			.then(data => setBrands(data));
 	}, []);
-	console.log(brands);
 	return (
 		<section className="container my-10 px-2">
 			<div className="flex flex-col items-center gap-4 justify-center mb-10">
