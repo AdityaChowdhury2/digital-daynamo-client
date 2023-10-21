@@ -14,16 +14,20 @@ const ProductDetails = () => {
 
 	const handleAddToCart = async () => {
 		const response = await axios.get(
-			`http://localhost:5000/api/user/${user.uid}`
+			`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`
 		);
 		const newProduct = { ...loadedProduct, quantity };
 		if (response.data.cart) {
 			const cart = response.data.cart;
 			cart.push(newProduct);
 			axios
-				.patch(`http://localhost:5000/api/user/${user.uid}`, cart, {
-					headers: { 'Content-Type': 'application/json' },
-				})
+				.patch(
+					`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`,
+					cart,
+					{
+						headers: { 'Content-Type': 'application/json' },
+					}
+				)
 				.then(response => {
 					if (response.data.modifiedCount) {
 						Swal.fire({ icon: 'success', title: 'Product added to your cart' });
@@ -31,9 +35,13 @@ const ProductDetails = () => {
 				});
 		} else {
 			axios
-				.patch(`http://localhost:5000/api/user/${user.uid}`, [newProduct], {
-					headers: { 'Content-Type': 'application/json' },
-				})
+				.patch(
+					`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`,
+					[newProduct],
+					{
+						headers: { 'Content-Type': 'application/json' },
+					}
+				)
 				.then(response => {
 					if (response.data.modifiedCount) {
 						Swal.fire({ icon: 'success', title: 'Product added to your cart' });

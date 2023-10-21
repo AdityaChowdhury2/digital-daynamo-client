@@ -23,9 +23,13 @@ const Cart = () => {
 			if (result.isConfirmed) {
 				const updatedCart = cart.filter(product => product._id !== id);
 				axios
-					.patch(`http://localhost:5000/api/user/${user.uid}`, updatedCart, {
-						headers: { 'Content-Type': 'application/json' },
-					})
+					.patch(
+						`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`,
+						updatedCart,
+						{
+							headers: { 'Content-Type': 'application/json' },
+						}
+					)
 					.then(response => {
 						if (response.data.modifiedCount) {
 							setCart(updatedCart);
@@ -36,7 +40,7 @@ const Cart = () => {
 		});
 	};
 	useEffect(() => {
-		fetch(`http://localhost:5000/api/user/${user.uid}`)
+		fetch(`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`)
 			.then(res => res.json())
 			.then(data => setCart(data?.cart));
 	}, [user.uid]);

@@ -16,14 +16,14 @@ const SocialLogin = () => {
 				email: res.user.email,
 				uid: res.user.uid,
 			};
-			const url = `http://localhost:5000/api/user/${res.user.uid}`;
+			const url = `https://digital-dynamo-server.vercel.app/api/user/${res.user.uid}`;
 			console.log(url);
 			fetch(url)
 				.then(res => {
 					console.log(res);
 					if (res.status !== 200) {
 						axios
-							.post('http://localhost:5000/api/user', user, {
+							.post('https://digital-dynamo-server.vercel.app/api/user', user, {
 								headers: { 'Content-Type': 'application/json' },
 							})
 							.then(response => console.log(response?.data))
