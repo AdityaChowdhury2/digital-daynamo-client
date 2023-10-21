@@ -47,13 +47,13 @@ const Register = () => {
 					email: res.user.email,
 					uid: res.user.uid,
 				};
-				axios.post('https://digital-dynamo-server.vercel.app/api/user', user, {
-					headers: { 'Content-Type': 'application/json' },
-				});
-				// .then(response => console.log(response))
-				// .catch(err => {
-				// 	console.log(err);
-				// });
+				axios
+					.post('http://localhost:5000/api/user', user, {
+						headers: { 'Content-Type': 'application/json' },
+					})
+					.catch(err => {
+						console.log(err);
+					});
 			});
 		}
 	};

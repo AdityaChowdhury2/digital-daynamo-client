@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import ReactStars from 'react-rating-star-with-type';
 import { useLoaderData } from 'react-router-dom';
-// import useAuth from '../../hooks/useAuth';
+
 import { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
@@ -11,24 +11,19 @@ const ProductDetails = () => {
 	const loadedProduct = useLoaderData();
 	const { user } = useAuth();
 	const [quantity, setQuantity] = useState(1);
-	// console.log(user);
 
 	const handleAddToCart = async () => {
 		const response = await axios.get(
-			`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`
+			`http://localhost:5000/api/user/${user.uid}`
 		);
 		const newProduct = { ...loadedProduct, quantity };
 		if (response.data.cart) {
 			const cart = response.data.cart;
 			cart.push(newProduct);
 			axios
-				.patch(
-					`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`,
-					cart,
-					{
-						headers: { 'Content-Type': 'application/json' },
-					}
-				)
+				.patch(`http://localhost:5000/api/user/${user.uid}`, cart, {
+					headers: { 'Content-Type': 'application/json' },
+				})
 				.then(response => {
 					if (response.data.modifiedCount) {
 						Swal.fire({ icon: 'success', title: 'Product added to your cart' });
@@ -36,13 +31,9 @@ const ProductDetails = () => {
 				});
 		} else {
 			axios
-				.patch(
-					`https://digital-dynamo-server.vercel.app/api/user/${user.uid}`,
-					[newProduct],
-					{
-						headers: { 'Content-Type': 'application/json' },
-					}
-				)
+				.patch(`http://localhost:5000/api/user/${user.uid}`, [newProduct], {
+					headers: { 'Content-Type': 'application/json' },
+				})
 				.then(response => {
 					if (response.data.modifiedCount) {
 						Swal.fire({ icon: 'success', title: 'Product added to your cart' });

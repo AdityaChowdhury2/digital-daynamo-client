@@ -217,7 +217,6 @@ const Home = () => {
 							title="map"
 							scrolling="no"
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59046.00597881342!2d91.78842666518118!3d22.3394509329647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acd8a71c5c3451%3A0x8145d1408572eb24!2sKotwali%2C%20Chattogram!5e0!3m2!1sen!2sbd!4v1697744462997!5m2!1sen!2sbd"
-							// style={{ filter: 'grayscale(1) contrast(1.2) opacity(0.4)' }}
 							allowFullScreen=""
 							loading="lazy"
 							referrerPolicy="no-referrer-when-downgrade"
