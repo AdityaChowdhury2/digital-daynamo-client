@@ -69,7 +69,7 @@ const Register = () => {
 							<div className="flex justify-center">
 								<div className="w-20">
 									<img
-										src={'https://i.ibb.co/LPv0gD7/digidynamo-Logo.png'}
+										src={'https://i.ibb.co/2hr24MN/digidynamo-Logo.png'}
 										alt=""
 									/>
 								</div>
