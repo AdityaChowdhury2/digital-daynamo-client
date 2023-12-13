@@ -50,9 +50,9 @@ const Router = createBrowserRouter([
 			{
 				path: '/profile/:email',
 				element: (
-					// <PrivateRoute>
-					<Profile />
-					// </PrivateRoute>
+					<PrivateRoute>
+						<Profile />
+					</PrivateRoute>
 				),
 			},
 			{
