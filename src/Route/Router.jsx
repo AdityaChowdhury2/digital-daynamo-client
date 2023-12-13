@@ -50,18 +50,16 @@ const Router = createBrowserRouter([
 			{
 				path: '/profile/:email',
 				element: (
-					<PrivateRoute>
-						<Profile />
-					</PrivateRoute>
+					// <PrivateRoute>
+					<Profile />
+					// </PrivateRoute>
 				),
 			},
 			{
 				path: '/brands/:brand',
 				element: <BrandPage />,
 				loader: ({ params }) =>
-					fetch(
-						`https://digital-dynamo-server.vercel.app/api/brands/${params.brand}`
-					),
+					fetch(`http://localhost:5000/api/v1/get-product/${params.brand}`),
 			},
 			{
 				path: '/updateProduct/:productId',
@@ -71,9 +69,7 @@ const Router = createBrowserRouter([
 					</PrivateRoute>
 				),
 				loader: ({ params }) =>
-					fetch(
-						`https://digital-dynamo-server.vercel.app/api/product/${params.productId}`
-					),
+					fetch(`http://localhost:5000/api/v1/products/${params.productId}`),
 			},
 			{
 				path: '/product/:productId',
@@ -83,9 +79,7 @@ const Router = createBrowserRouter([
 					</PrivateRoute>
 				),
 				loader: ({ params }) =>
-					fetch(
-						`https://digital-dynamo-server.vercel.app/api/product/${params.productId}`
-					),
+					fetch(`http://localhost:5000/api/v1/products/${params.productId}`),
 			},
 		],
 	},

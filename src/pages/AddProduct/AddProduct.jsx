@@ -13,26 +13,26 @@ const AddProduct = () => {
 		const image = form.imageUrl.value;
 		const brand = form.brand.value;
 		const price = form.price.value;
-		const type = form.type.value;
+		const category = form.category.value;
 		const short_description = form.description.value;
 		const product = {
 			image,
 			name,
 			brand,
-			type,
+			category,
 			price,
 			short_description,
 			rating,
 		};
 		const response = await axios
-			.post(`https://digital-dynamo-server.vercel.app/api/products/`, product, {
+			.post(`http://localhost:5000/api/v1/products`, product, {
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.catch(e => {
 				console.log(e.message);
 			});
 
-		if (response.data.insertedId) {
+		if (response.data) {
 			Swal.fire({
 				icon: 'success',
 				title: 'Product Added ',
@@ -122,24 +122,31 @@ const AddProduct = () => {
 							/>
 						</div>
 						<div>
-							<label htmlFor="type" className="block mb-2 text-sm font-medium">
-								Type
+							<label
+								htmlFor="category"
+								className="block mb-2 text-sm font-medium"
+							>
+								Category
 							</label>
 							<select
-								id="type"
-								name="type"
+								id="category"
+								name="category"
 								className="border bg-zinc-200 dark:bg-gray-900 border-gray-300 text-sm rounded-lg  block w-full p-2.5 "
 								required
 							>
-								<option value="">Select type</option>
-								<option value="TV">TV/Monitors</option>
-								<option value="PC">PC</option>
-								<option value="Gaming Console">Gaming/Console</option>
-								<option value="Headphone">Headphone</option>
-								<option value="Camera">Camera</option>
+								<option value="">Select Category</option>
 								<option value="Phone">Phone</option>
+								<option value="TV">TV</option>
+								<option value="Monitor">Monitor</option>
+								<option value="Kitchen Appliance">Kitchen Appliance</option>
+								<option value="Gaming Console">Gaming Console</option>
+								<option value="Camera">Camera</option>
 								<option value="Watch">Watch</option>
+								<option value="Laptop">Laptop</option>
+								<option value="Accessories">Accessories</option>
 								<option value="Tablet">Tablet</option>
+								<option value="Headphone">Headphone</option>
+								<option value="PC">PC</option>
 							</select>
 						</div>
 						<div>

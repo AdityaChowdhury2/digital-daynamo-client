@@ -13,15 +13,26 @@ const Login = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { logIn } = useAuth();
-	const handleSignIn = async e => {
+	const handleSignIn = e => {
 		e.preventDefault();
 		const form = e.target;
 		const email = form.email.value;
 		const password = form.password.value;
-		await logIn(email, password)
+		logIn(email, password)
 			.then(res => {
 				console.log(res.user);
 				navigate(location.state || '/');
+				fetch(`http://localhost:5000/api/v1/user/${res.user.uid}`, {
+					method: 'PUT',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						uid: res.user?.uid,
+						email: res.user?.email,
+						displayName: res.user?.displayName,
+					}),
+				})
+					.then(res => res.json())
+					.then(data => console.log(data));
 			})
 			.catch(() => {
 				Swal.fire({

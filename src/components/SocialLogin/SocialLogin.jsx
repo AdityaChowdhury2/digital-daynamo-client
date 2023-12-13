@@ -6,31 +6,21 @@ const SocialLogin = () => {
 	const { googleLogin } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
-	const handleGoogleLogin = async () => {
-		await googleLogin().then(res => {
+	const handleGoogleLogin = () => {
+		googleLogin().then(res => {
 			navigate(location.state || '/');
 			// console.log(res.user);
 			// console.log(res.user.uid);
 			const user = {
-				displayName: res.user.displayName,
-				email: res.user.email,
-				uid: res.user.uid,
+				displayName: res.user?.displayName,
+				email: res.user?.email,
+				uid: res.user?.uid,
 			};
-			const url = `https://digital-dynamo-server.vercel.app/api/user/${res.user.uid}`;
+			const url = `http://localhost:5000/api/v1/user/${user.uid}`;
 			console.log(url);
-			fetch(url)
-				.then(res => {
-					console.log(res);
-					if (res.status !== 200) {
-						axios
-							.post('https://digital-dynamo-server.vercel.app/api/user', user, {
-								headers: { 'Content-Type': 'application/json' },
-							})
-							.then(response => console.log(response?.data))
-							.catch(err => console.log(err));
-					} else return res.json();
-				})
-				.then(data => console.log(data))
+			axios
+				.put(url, user)
+				.then(response => console.log(response?.data))
 				.catch(err => console.log(err));
 		});
 	};
