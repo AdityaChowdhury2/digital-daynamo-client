@@ -48,7 +48,7 @@ const Register = () => {
 					uid: res.user.uid,
 				};
 				axios
-					.post('https://digital-dynamo-server.vercel.app/api/user', user, {
+					.post('http://localhost:5000/api/user', user, {
 						headers: { 'Content-Type': 'application/json' },
 					})
 					.catch(err => {

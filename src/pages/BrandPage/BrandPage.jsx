@@ -8,17 +8,17 @@ const BrandPage = () => {
 	const params = useParams();
 
 	useEffect(() => {
-		fetch(
-			`https://digital-dynamo-server.vercel.app/api/banners/${params.brand}`
-		)
+		fetch(`http://localhost:5000/api/v1/banners/${params.brand}`)
 			.then(res => res.json())
-			.then(data => setBanners(data.banner_images));
+			.then(data => {
+				setBanners(data.banner_images);
+			});
 	}, [params.brand]);
 
 	return (
 		<div>
-			{banners.length && <BrandsBanner banners={banners} />}
-			{brandsProducts.length ? (
+			{banners?.length && <BrandsBanner banners={banners} />}
+			{brandsProducts?.length ? (
 				<div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 gap-5 px-4">
 					{brandsProducts.map(product => (
 						<div
@@ -40,7 +40,7 @@ const BrandPage = () => {
 										<small>{product.brand}</small>
 									</p>
 									<p className="text-gray-400">
-										<small>{product.type}</small>
+										<small>{product.category}</small>
 									</p>
 								</div>
 								<p className="md:text-xl text-lg font-bold">{product.name}</p>
