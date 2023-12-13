@@ -22,7 +22,7 @@ const UpdateProduct = () => {
 		}).then(result => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`http://localhost:5000/api/product/${loadedProduct._id}`)
+					.delete(`http://localhost:5000/api/v1/products/${loadedProduct._id}`)
 					.then(response => {
 						if (response.data.deletedCount) {
 							Swal.fire('Deleted!', 'Your Item has been deleted.', 'success');

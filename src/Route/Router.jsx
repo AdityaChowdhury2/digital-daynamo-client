@@ -50,9 +50,9 @@ const Router = createBrowserRouter([
 			{
 				path: '/profile/:email',
 				element: (
-					<PrivateRoute>
-						<Profile />
-					</PrivateRoute>
+					// <PrivateRoute>
+					<Profile />
+					// </PrivateRoute>
 				),
 			},
 			{
@@ -69,7 +69,7 @@ const Router = createBrowserRouter([
 					</PrivateRoute>
 				),
 				loader: ({ params }) =>
-					fetch(`http://localhost:5000/api/product/${params.productId}`),
+					fetch(`http://localhost:5000/api/v1/products/${params.productId}`),
 			},
 			{
 				path: '/product/:productId',
@@ -79,7 +79,7 @@ const Router = createBrowserRouter([
 					</PrivateRoute>
 				),
 				loader: ({ params }) =>
-					fetch(`http://localhost:5000/api/product/${params.productId}`),
+					fetch(`http://localhost:5000/api/v1/products/${params.productId}`),
 			},
 		],
 	},

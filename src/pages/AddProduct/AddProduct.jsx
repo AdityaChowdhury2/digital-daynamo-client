@@ -13,26 +13,26 @@ const AddProduct = () => {
 		const image = form.imageUrl.value;
 		const brand = form.brand.value;
 		const price = form.price.value;
-		const type = form.type.value;
+		const category = form.category.value;
 		const short_description = form.description.value;
 		const product = {
 			image,
 			name,
 			brand,
-			type,
+			category,
 			price,
 			short_description,
 			rating,
 		};
 		const response = await axios
-			.post(`http://localhost:5000/api/products/`, product, {
+			.post(`http://localhost:5000/api/v1/products`, product, {
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.catch(e => {
 				console.log(e.message);
 			});
 
-		if (response.data.insertedId) {
+		if (response.data) {
 			Swal.fire({
 				icon: 'success',
 				title: 'Product Added ',
